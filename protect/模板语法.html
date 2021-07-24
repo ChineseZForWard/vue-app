@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--v-html会转义 v-text不会转义 差值表达式不会转义 v-xxx后面跟的是js表达式-->
+    <div v-text="name + 'TestHome'"></div>
+    <div>{{name + 'TestHome'}}</div>
+    <div v-text="name"></div>
+    <div v-html="name"></div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            name: 'ZhangFuWei'
+        }
+    })
+</script>
+</body>
+</html>
