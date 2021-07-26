@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-if="show">
+        用户名：<input key="username">
+    </div>
+    <div v-else>
+        邮箱名：<input key="email">
+    </div>
+<!--    v-show是样式加了一个display: none 性能比较高-->
+<!--    <div v-show="show">{{message}}</div>-->
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello World'
+        }
+    })
+</script>
+</body>
+</html>
