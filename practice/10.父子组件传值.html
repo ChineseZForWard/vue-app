@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件传值</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+<div id="root">
+<!--    v-bind后面的0是js表达式-->
+    <counters v-bind:count="1" @change="handleIncrease"></counters>
+    <counters v-bind:count="2" @change="handleIncrease"></counters>
+    <div>{{total}}</div>
+</div>
+
+<script>
+    // 单向数据流，父组件可以向子组件传值，子组件不能修改父组件传递过来的值
+    var counter = {
+        props: ['count'],
+        data: function() {
+            return {number: this.count}
+        },
+        template: '<div @click="handleClick">{{number}}</div>',
+        methods: {
+            handleClick: function () {
+                this.number += 2
+                this.$emit('change', 2)
+            }
+        }
+    }
+
+    var vm = new Vue({
+        el: '#root',
+        components: {
+            counters: counter
+        },
+        data: {
+            total: 5
+        },
+        methods: {
+            // 这里的step就是子组件传递过来的参数1
+            handleIncrease: function (step) {
+                this.total += step
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

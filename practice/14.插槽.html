@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>插槽</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <child>
+        <div class="header" slot="header">header</div>
+        <div class="footer" slot="footer">footer</div>
+
+        <template slot-scope="props">
+            <li>{{props.items}}--test</li>
+        </template>
+    </child>
+</div>
+
+<script>
+    Vue.component('child', {
+        data: function() {
+            return {
+                list: [1, 2, 3, 4]
+            }
+        },
+        template: `<div>
+<slot name="header">default</slot>
+<slot name="footer"></slot>
+<ul><slot v-for="item of list" v-bind:items="item"></slot></ul>
+</div>`
+    })
+
+    var vm = new Vue({
+        el: '#root'
+    })
+</script>
+
+</body>
+</html>
